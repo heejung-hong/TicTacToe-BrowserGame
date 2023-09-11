@@ -1,9 +1,13 @@
 /*-------- constants --------*/
 const COLORS = {
   '0': 'white',
-  '1': 'skyblue',
+  '1': 'paleturquoise',
   '-1': 'pink'
 };
+const SHAPE = {
+  '1': 'X',
+  '-1': 'O'
+}
 
 /*----- state variables -----*/
 // board: 2D array
@@ -20,7 +24,7 @@ let winner;
 
 
 /*----- cached elements -----*/
-
+const messageEl = document.querySelector('h1');
 
 
 
@@ -73,7 +77,13 @@ function renderBoard() {
 }
 
 function renderMessage() {
-
+  if (winner === 'T') {
+    messageEl.innerText = 'It\'s a Tie!!!';
+  } else if (winner) {
+    messageEl.innerHTML = `<span style="color: ${COLORS[winner]}">${SHAPE[winner]}</span> Wins!!!`;
+  } else {
+    messageEl.innerHTML = `<span style="color: ${COLORS[turn]}">${SHAPE[turn]}</span>'s Turn`;
+  }
 }
 
 function renderControls() {
