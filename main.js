@@ -22,12 +22,9 @@ let winner;
   // 1 or -1 winner
   // 'T' for tie
 
-
 /*----- cached elements -----*/
 const messageEl = document.querySelector('h1');
-
-
-
+const playAgainBtn = document.querySelector('button');
 
 /*----- event listeners -----*/
 
@@ -82,10 +79,14 @@ function renderMessage() {
   } else if (winner) {
     messageEl.innerHTML = `<span style="color: ${COLORS[winner]}">${SHAPE[winner]}</span> Wins!!!`;
   } else {
+    // game is in play
     messageEl.innerHTML = `<span style="color: ${COLORS[turn]}">${SHAPE[turn]}</span>'s Turn`;
   }
 }
 
 function renderControls() {
-
+  // Ternary expression is the go to when you want 1 of 2 values returned
+  // <conditional expression> ? '<truthy exp>' : '<false exp>'
+  playAgainBtn.style.visibility = winner ? 'visible' : 'hidden'
+  // don't use display none because it would delete the button and jitter the DOM
 }
