@@ -1,0 +1,60 @@
+/* all elements */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* viewport (window of browser) units: vh, vw, vmin (smallest between vh and vw) */
+  height: 100vh;
+  /* remove default margin */
+  margin: 0;
+  font-family: 'Nova Mono', monospace;
+  /* by default flex direction is horizontal */
+  display: flex;
+  /* change the flex direction to vertical */
+  flex-direction: column;
+  /* center vertically */
+  justify-content: center;
+  /* center horizontally */
+  align-items: center;
+}
+
+header {
+  font-family: 'Titan One', cursive;
+  /* 8% of the smallest between vh and vw */
+  font-size: 8vmin;
+  letter-spacing: 1vmin;
+  margin-top: 10vmin;
+}
+
+h1 {
+  font-size: 6vmin;
+}
+
+#board {
+  /* grid container */
+  display: grid;
+  grid-template-columns: repeat(3, 20vmin);
+  grid-template-rows: repeat(3, 20vmin);
+}
+
+/* selects all the divs in the board section */
+#board > div {
+  border: 0.5vmin solid whitesmoke;
+}
+
+button {
+  font-family: 'Nova Mono', monospace;
+  margin: 6vmin;
+  padding: 1vmin;
+  border-radius: 4vmin;
+  border: 0.1 solid grey;
+  color: grey;
+  margin-bottom: 10vmin;
+}
+
+/* hover sudoclass */
+button:hover {
+  color: whitesmoke;
+  background-color: darkgrey;
+}
