@@ -1,5 +1,9 @@
 /*-------- constants --------*/
-
+const COLORS = {
+  '0': 'white',
+  '1': 'skyblue',
+  '-1': 'pink'
+};
 
 /*----- state variables -----*/
 // board: 2D array
@@ -46,6 +50,32 @@ function init() {
   render();
 }
 
+// render to visialize all state in the DOM
 function render() {
-  
+  renderBoard();
+  renderMessage();
+  // hide and show UI elements (controls)
+  renderControls();
+}
+
+// interate over board array to visualize the board
+function renderBoard() {
+  board.forEach(function(colArr, colIdx) { // board has 3 column elements
+    // console.log(colIdx, colArr)
+    colArr.forEach(function(cellVal, rowIdx) { // iterating over column to get the rowIdx
+    // console.log(colIdx, rowIdx, cellVal)
+      const cellId = `c${colIdx}r${rowIdx}`;
+      const cellEl = document.getElementById(cellId)
+      // console.log(cellId)
+      cellEl.style.backgroundColor = COLORS[cellVal] // use object to lookup color in constants above
+    })
+  });
+}
+
+function renderMessage() {
+
+}
+
+function renderControls() {
+
 }
