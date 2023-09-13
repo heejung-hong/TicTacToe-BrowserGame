@@ -25,12 +25,12 @@ let winner;
 /*----- cached elements -----*/
 const messageEl = document.querySelector('h1');
 const playAgainBtn = document.querySelector('button');
-
+const boardEls = [...document.querySelectorAll('#board > div:nth-child(-n+3)')];
+// console.log(boardEls)
 /*----- event listeners -----*/
-
-
-
-
+// In response to user interaction, update all impacted state, then call render()
+// use event delegation
+document.getElementById('board').addEventListener('click', selectBox) // provide selectBox as a callback function
 
 /*-------- functions --------*/
 // call the init function
@@ -62,9 +62,10 @@ function render() {
 // interate over board array to visualize the board
 function renderBoard() {
   board.forEach(function(colArr, colIdx) { // board has 3 column elements
-    // console.log(colIdx, colArr)
+    console.log(colArr, colIdx)
+    // cellVal is 0, 1, or -1
     colArr.forEach(function(cellVal, rowIdx) { // iterating over column to get the rowIdx
-    // console.log(colIdx, rowIdx, cellVal)
+    console.log(colIdx, rowIdx, cellVal)
       const cellId = `c${colIdx}r${rowIdx}`;
       const cellEl = document.getElementById(cellId)
       // console.log(cellId)
@@ -89,4 +90,20 @@ function renderControls() {
   // <conditional expression> ? '<truthy exp>' : '<false exp>'
   playAgainBtn.style.visibility = winner ? 'visible' : 'hidden'
   // don't use display none because it would delete the button and jitter the DOM
+}
+
+
+function selectBox(event) {
+  console.log(event.target)
+  // column that was clicked
+  const colIdx = boardEls.indexOf(event.target);
+  console.log(colIdx);
+  const colArr = board[colIdx]; // Shortcut to column array 
+  // find the index of the first 0 in colArr
+  const rowIdx = colArr.indexOf(0);
+  // Update the board state with the current player value (turn)
+  // board[colIdx][rowIdx] = turn;
+  colArr[rowIdx] = turn;
+  turn *= -1 // changes the player
+  render()
 }
