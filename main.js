@@ -30,7 +30,7 @@ const boardEls = [...document.querySelectorAll('#board > div:nth-child(-n+3)')];
 /*----- event listeners -----*/
 // In response to user interaction, update all impacted state, then call render()
 // use event delegation
-document.getElementById('board').addEventListener('click', selectBox) // provide selectBox as a callback function
+// document.getElementById('board').addEventListener('click', selectBox) // provide selectBox as a callback function
 
 /*-------- functions --------*/
 // call the init function
@@ -40,9 +40,9 @@ function init() {
   // to visualize the board's mapping to the DOM,
   // rotate the board array 90 degrees counter-clockwise
   board = [ // no let or const to use the state variable above
-    [0, 0, 0], // col 0
-    [0, 0, 0], // col 1
-    [0, 0, 0]  // col 2
+    0, 0, 0,
+    0, 0, 0,
+    0, 0, 0
   ];
   // when game starts, it will be player one 
   turn = 1;
@@ -54,23 +54,21 @@ function init() {
 // render to visialize all state in the DOM
 function render() {
   renderBoard();
-  renderMessage();
-  // hide and show UI elements (controls)
-  renderControls();
+  // renderMessage();
+  // // hide and show UI elements (controls)
+  // renderControls();
 }
 
 // interate over board array to visualize the board
 function renderBoard() {
-  board.forEach(function(colArr, colIdx) { // board has 3 column elements
-    console.log(colArr, colIdx)
-    // cellVal is 0, 1, or -1
-    colArr.forEach(function(cellVal, rowIdx) { // iterating over column to get the rowIdx
-    console.log(colIdx, rowIdx, cellVal)
-      const cellId = `c${colIdx}r${rowIdx}`;
-      const cellEl = document.getElementById(cellId)
-      // console.log(cellId)
-      cellEl.style.backgroundColor = COLORS[cellVal] // use object to lookup color in constants above
-    })
+  board.forEach(function(boardEl, idx) { // board has 3 column elements
+    // console.log(boardEl, idx) // 00 01 02 03 04 05 06 07 08
+    // boardEl is 0, 1, or -1    
+    const cellId = `c${idx}`;
+    // console.log(cellId) // c0 c1 c2 c3 c4 c5 c6 c7 c8
+    const cellEl = document.getElementById(cellId)
+    // console.log(cellEl) // <div id="c0" style="background-color: paleturquoise;"></div>
+    cellEl.style.backgroundColor = COLORS[boardEl] // use object to lookup color in constants above
   });
 }
 
@@ -93,17 +91,17 @@ function renderControls() {
 }
 
 
-function selectBox(event) {
-  console.log(event.target)
-  // column that was clicked
-  const colIdx = boardEls.indexOf(event.target);
-  console.log(colIdx);
-  const colArr = board[colIdx]; // Shortcut to column array 
-  // find the index of the first 0 in colArr
-  const rowIdx = colArr.indexOf(0);
-  // Update the board state with the current player value (turn)
-  // board[colIdx][rowIdx] = turn;
-  colArr[rowIdx] = turn;
-  turn *= -1 // changes the player
-  render()
-}
+// function selectBox(event) {
+//   // console.log(event.target)
+//   // column that was clicked
+//   const colIdx = boardEls.indexOf(event.target);
+//   // console.log(colIdx);
+//   const colArr = board[colIdx]; // Shortcut to column array 
+//   // find the index of the first 0 in colArr
+//   const rowIdx = colArr.indexOf(0);
+//   // Update the board state with the current player value (turn)
+//   // board[colIdx][rowIdx] = turn;
+//   colArr[rowIdx] = turn;
+//   turn *= -1 // changes the player
+//   render()
+// }
