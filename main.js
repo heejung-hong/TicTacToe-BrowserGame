@@ -25,12 +25,12 @@ let winner;
 /*----- cached elements -----*/
 const messageEl = document.querySelector('h1');
 const playAgainBtn = document.querySelector('button');
-const boardEls = [...document.querySelectorAll('#board > div:nth-child(-n+3)')];
-// console.log(boardEls)
+const boardEls = [...document.querySelectorAll('#board > div')];
+// console.log(boardEls) // [div#c0, div#c1, div#c2, div#c3, div#c4, div#c5, div#c6, div#c7, div#c8]
 /*----- event listeners -----*/
 // In response to user interaction, update all impacted state, then call render()
 // use event delegation
-// document.getElementById('board').addEventListener('click', selectBox) // provide selectBox as a callback function
+document.getElementById('board').addEventListener('click', selectBox) // provide selectBox as a callback function
 
 /*-------- functions --------*/
 // call the init function
@@ -54,9 +54,9 @@ function init() {
 // render to visialize all state in the DOM
 function render() {
   renderBoard();
-  // renderMessage();
-  // // hide and show UI elements (controls)
-  // renderControls();
+  renderMessage();
+  // hide and show UI elements (controls)
+  renderControls();
 }
 
 // interate over board array to visualize the board
@@ -70,6 +70,17 @@ function renderBoard() {
     // console.log(cellEl) // <div id="c0" style="background-color: paleturquoise;"></div>
     cellEl.style.backgroundColor = COLORS[boardEl] // use object to lookup color in constants above
   });
+}
+
+function selectBox(event) {
+  // console.log(event.target)
+  // column that was clicked
+  const boardEl = boardEls.indexOf(event.target);
+  // console.log(boardEl); // after click return 0 1 2 3 4 5 6 7
+  board[boardEl] = turn; // update board array with turn in the index clicked
+  // console.log(boardEl); // returns the index number and changes the color of the boardEl
+  turn *= -1 // changes the player
+  render()
 }
 
 function renderMessage() {
@@ -89,19 +100,3 @@ function renderControls() {
   playAgainBtn.style.visibility = winner ? 'visible' : 'hidden'
   // don't use display none because it would delete the button and jitter the DOM
 }
-
-
-// function selectBox(event) {
-//   // console.log(event.target)
-//   // column that was clicked
-//   const colIdx = boardEls.indexOf(event.target);
-//   // console.log(colIdx);
-//   const colArr = board[colIdx]; // Shortcut to column array 
-//   // find the index of the first 0 in colArr
-//   const rowIdx = colArr.indexOf(0);
-//   // Update the board state with the current player value (turn)
-//   // board[colIdx][rowIdx] = turn;
-//   colArr[rowIdx] = turn;
-//   turn *= -1 // changes the player
-//   render()
-// }
