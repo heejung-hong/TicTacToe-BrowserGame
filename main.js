@@ -80,7 +80,39 @@ function selectBox(event) {
   board[boardEl] = turn; // update board array with turn in the index clicked
   // console.log(boardEl); // returns the index number and changes the color of the boardEl
   turn *= -1 // changes the player
+  winner = getWinner(board)
+  console.log(winner)
   render()
+}
+
+// Check for winner in board state and return null if no winner, 1 or -1 if a player has won, else 'T'
+
+// if index 0, 1, 2 === 1 or -1
+function getWinner(board){
+  return rowOneX(board) ||
+    rowOneO(board) ||
+    rowTwoX(board) ||
+    rowTwoO(board) ||
+    rowThreeX(board) ||
+    rowThreeO(board)
+}
+function rowOneX(board){
+  return (board[0] && board[1] && board[2] === 1) ? board[2] : null; 
+}
+function rowOneO(board){
+  return (board[0] && board[1] && board[2] === -1) ? board[2] : null; 
+}
+function rowTwoX(board){
+  return (board[3] && board[4] && board[5] === 1) ? board[5] : null; 
+}
+function rowTwoO(board){
+  return (board[3] && board[4] && board[5] === -1) ? board[5] : null; 
+}
+function rowThreeX(board){
+  return (board[6] && board[7] && board[8] === 1) ? board[8] : null; 
+}
+function rowThreeO(board){
+  return (board[6] && board[7] && board[8] === -1) ? board[8] : null; 
 }
 
 function renderMessage() {
