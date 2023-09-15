@@ -99,7 +99,8 @@ function getWinner(board){
     colTwoX(board) ||
     colTwoO(board) ||
     colThreeX(board) ||
-    colThreeO(board)
+    colThreeO(board) ||
+    tieGame(board)    
 }
 function rowOneX(board){
   return (board[0] === 1 && board[1] === 1 && board[2] === 1) ? board[2] : null; 
@@ -136,6 +137,9 @@ function colThreeX(board){
 }
 function colThreeO(board){
   return (board[2] === -1 && board[5] === -1 && board[8] === -1) ? board[8] : null; 
+}
+function tieGame(board) {
+  return (board[0] !== 0 && board[1] !== 0 && board[2] !== 0 && board[3] !== 0 && board[4] !== 0 && board[5] !== 0 && board[6] !== 0 && board[7] !== 0 && board[8] !== 0) ? 'T' : null;
 }
 
 
