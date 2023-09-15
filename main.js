@@ -88,7 +88,7 @@ function selectBox(event) {
 
 // if index 0, 1, 2 === 1 or -1
 function getWinner(board){
-  return rowOneX(board) ||
+  return rowOneX(board) ||  
     rowOneO(board) ||
     rowTwoX(board) ||
     rowTwoO(board) ||
@@ -100,6 +100,10 @@ function getWinner(board){
     colTwoO(board) ||
     colThreeX(board) ||
     colThreeO(board) ||
+    diaOneX(board) ||
+    diaOneO(board) ||
+    diaTwoX(board) ||
+    diaTwoO(board) ||
     tieGame(board)    
 }
 function rowOneX(board){
@@ -137,6 +141,18 @@ function colThreeX(board){
 }
 function colThreeO(board){
   return (board[2] === -1 && board[5] === -1 && board[8] === -1) ? board[8] : null; 
+}
+function diaOneX(board){
+  return (board[0] === 1 && board[4] === 1 && board[8] === 1) ? board[8] : null; 
+}
+function diaOneO(board){
+  return (board[0] === -1 && board[4] === -1 && board[8] === -1) ? board[8] : null; 
+}
+function diaTwoX(board){
+  return (board[2] === 1 && board[4] === 1 && board[6] === 1) ? board[6] : null; 
+}
+function diaTwoO(board){
+  return (board[2] === -1 && board[4] === -1 && board[6] === -1) ? board[6] : null; 
 }
 function tieGame(board) {
   return (board[0] !== 0 && board[1] !== 0 && board[2] !== 0 && board[3] !== 0 && board[4] !== 0 && board[5] !== 0 && board[6] !== 0 && board[7] !== 0 && board[8] !== 0) ? 'T' : null;
