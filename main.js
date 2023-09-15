@@ -81,7 +81,6 @@ function selectBox(event) {
   // console.log(boardEl); // returns the index number and changes the color of the boardEl
   turn *= -1 // changes the player
   winner = getWinner(board)
-  console.log(winner)
   render()
 }
 
@@ -94,26 +93,51 @@ function getWinner(board){
     rowTwoX(board) ||
     rowTwoO(board) ||
     rowThreeX(board) ||
-    rowThreeO(board)
+    rowThreeO(board) ||
+    colOneX(board) ||
+    colOneO(board) ||
+    colTwoX(board) ||
+    colTwoO(board) ||
+    colThreeX(board) ||
+    colThreeO(board)
 }
 function rowOneX(board){
-  return (board[0] && board[1] && board[2] === 1) ? board[2] : null; 
+  return (board[0] === 1 && board[1] === 1 && board[2] === 1) ? board[2] : null; 
 }
 function rowOneO(board){
-  return (board[0] && board[1] && board[2] === -1) ? board[2] : null; 
+  return (board[0] === -1 && board[1] === -1 && board[2] === -1) ? board[2] : null; 
 }
 function rowTwoX(board){
-  return (board[3] && board[4] && board[5] === 1) ? board[5] : null; 
+  return (board[3] === 1 && board[4] === 1 && board[5] === 1) ? board[5] : null; 
 }
 function rowTwoO(board){
-  return (board[3] && board[4] && board[5] === -1) ? board[5] : null; 
+  return (board[3] === -1 && board[4] === -1 && board[5] === -1) ? board[5] : null; 
 }
 function rowThreeX(board){
-  return (board[6] && board[7] && board[8] === 1) ? board[8] : null; 
+  return (board[6] === 1 && board[7] === 1 && board[8] === 1) ? board[8] : null; 
 }
 function rowThreeO(board){
-  return (board[6] && board[7] && board[8] === -1) ? board[8] : null; 
+  return (board[6] === -1 && board[7] === -1 && board[8] === -1) ? board[8] : null; 
 }
+function colOneX(board){
+  return (board[0] === 1 && board[3] === 1 && board[6] === 1) ? board[6] : null; 
+}
+function colOneO(board){
+  return (board[0] === -1 && board[3] === -1 && board[6] === -1) ? board[6] : null; 
+}
+function colTwoX(board){
+  return (board[1] === 1 && board[4] === 1 && board[7] === 1) ? board[7] : null; 
+}
+function colTwoO(board){
+  return (board[1] === -1 && board[4] === -1 && board[7] === -1) ? board[7] : null; 
+}
+function colThreeX(board){
+  return (board[2] === 1 && board[5] === 1 && board[8] === 1) ? board[8] : null; 
+}
+function colThreeO(board){
+  return (board[2] === -1 && board[5] === -1 && board[8] === -1) ? board[8] : null; 
+}
+
 
 function renderMessage() {
   if (winner === 'T') {
